@@ -1,6 +1,5 @@
-package f12018
+package udpHeaders
 
-// https://forums.codemasters.com/topic/30601-f1-2018-udp-specification/
 type PacketHeader struct {
 	M_packetFormat    uint16  // 2018
 	M_packetVersion   uint8   // Version of this packet type, all start from 1
@@ -174,7 +173,7 @@ type CarTelemetryData struct {
 
 type PacketCarTelemetryData struct {
 	M_header           PacketHeader
-	m_carTelemetryData []CarTelemetryData
+	M_carTelemetryData []CarTelemetryData
 	M_buttonStatus     uint32
 }
 
