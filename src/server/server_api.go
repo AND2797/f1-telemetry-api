@@ -1,6 +1,5 @@
-package server
+package server 
 
 type server interface {
-	Listen()
-	Write()
+	Close()
 }
