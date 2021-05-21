@@ -31,18 +31,33 @@ func NewSession2018(HostPort string) *Session2018 {
 func (s *Session2018) Listen() {
 
 	p := make([]byte, 2048)
-
 	for {
 		s.Server.ReadFromUDP(p)
-		buf := bytes.NewReader(p)
+		headerReader := bytes.NewReader(p)
+		// motionReader := bytes.NewReader(p)
+		// motionPacket := udpHeaders.PacketMotionData{}
 		s.PacketHeader = udpHeaders.PacketHeader2018{}
-		err := binary.Read(buf, binary.LittleEndian, &s.PacketHeader)
-		// pktHeader, err = getPacketHeader(p, pktHeader)
-		fmt.Println(s.PacketHeader)
-		if err != nil {
-			fmt.Println(err)
-			continue
-		}
+		binary.Read(headerReader, binary.LittleEndian, &s.PacketHeader)
+		//send info via channel?
+		// switch packetId := s.PacketHeader.M_packetId; packetId{
+		// case udpHeaders.Motion:
+		// 	fmt.Println("motion")
+
+		// case udpHeaders.Session:
+
+		// case udpHeaders.Lap:
+
+		// case udpHeaders.Event:
+
+		// case udpHeaders.Participants:
+
+		// case udpHeaders.CarSetups:
+
+		// case udpHeaders.CarTelemetry:
+
+		// case udpHeaders.
+
+		// }
 	}
 }
 

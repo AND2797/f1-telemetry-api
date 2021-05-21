@@ -10,6 +10,9 @@ type PacketHeader struct {
 	M_playerCarIndex  uint8   // Index of player's car in the array
 }
 
+/*
+Motion 0, Session 1, Lap Data 2, Event 3, Participants 4, Car Setups 5, Car Telemetry 6, Car Status 7*/
+
 type CarMotionData struct {
 	M_worldPositionX float32
 	M_worldPositionY float32
@@ -37,15 +40,15 @@ type CarMotionData struct {
 
 type PacketMotionData struct {
 	M_header        PacketHeader
-	M_carMotionData []CarMotionData
+	M_carMotionData [20]CarMotionData
 
 	//Extra player car ONLY data
 
-	M_suspensionPosition     []float32
-	M_suspensionVelocity     []float32
-	M_suspensionAcceleration []float32
-	M_wheelSpeed             []float32
-	M_wheelSlip              []float32
+	M_suspensionPosition     [4]float32
+	M_suspensionVelocity     [4]float32
+	M_suspensionAcceleration [4]float32
+	M_wheelSpeed             [4]float32
+	M_wheelSlip              [4]float32
 	M_localVelocityX         float32
 	M_localVelocityY         float32
 	M_localVelocityZ         float32
@@ -104,12 +107,12 @@ type LapData struct {
 
 type PacketLapData struct {
 	M_Header  PacketHeader
-	M_lapData []LapData
+	M_lapData [20]LapData
 }
 
 type PacketEventData struct {
 	M_header          PacketHeader
-	M_eventStringCode []uint8
+	M_eventStringCode [4]uint8
 }
 
 type ParticipantData struct {
@@ -118,13 +121,13 @@ type ParticipantData struct {
 	M_teamId       uint8
 	M_raceNumber   uint8
 	M_nationality  uint8
-	M_name         []byte
+	M_name         [48]byte
 }
 
 type PacketParticipantsData struct {
 	M_header      PacketHeader
 	M_numCars     uint8
-	M_partcipants []ParticipantData
+	M_partcipants [20]ParticipantData
 }
 
 type CarSetupData struct {
@@ -151,7 +154,7 @@ type CarSetupData struct {
 
 type PacketCarSetupData struct {
 	M_header    PacketHeader
-	M_carSetups []CarSetupData
+	M_carSetups [20]CarSetupData
 }
 
 type CarTelemetryData struct {
@@ -164,16 +167,16 @@ type CarTelemetryData struct {
 	M_engineRPM               uint16
 	M_drs                     uint8
 	M_revLightsPercent        uint8
-	M_brakesTemperature       []uint16
-	M_tyresSurfaceTemperature []uint16
-	M_tyresInnerTemperature   []uint16
-	M_engineTemperature       []uint16
-	M_tyresPressure           []uint16
+	M_brakesTemperature       [4]uint16
+	M_tyresSurfaceTemperature [4]uint16
+	M_tyresInnerTemperature   [4]uint16
+	M_engineTemperature       uint16
+	M_tyresPressure           [4]float32
 }
 
 type PacketCarTelemetryData struct {
 	M_header           PacketHeader
-	M_carTelemetryData []CarTelemetryData
+	M_carTelemetryData [20]CarTelemetryData
 	M_buttonStatus     uint32
 }
 
@@ -189,9 +192,9 @@ type CarStatusData struct {
 	M_idleRPM                 uint16
 	M_maxGears                uint8
 	M_drsAllowed              uint8
-	M_tyresWear               []uint8
+	M_tyresWear               [4]uint8
 	M_tyreCompound            uint8
-	M_tyresDamage             []uint8
+	M_tyresDamage             [4]uint8
 	M_frontLeftWingDamage     uint8
 	M_frontRightWingDamage    uint8
 	M_rearWingDamage          uint8
@@ -208,5 +211,5 @@ type CarStatusData struct {
 
 type PacketCarStatusData struct {
 	M_header        PacketHeader
-	M_carStatusData []CarStatusData
+	M_carStatusData [20]CarStatusData
 }
