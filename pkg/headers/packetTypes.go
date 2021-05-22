@@ -1,4 +1,4 @@
-package udpHeaders
+package headers
 
 const (
 	Motion = iota

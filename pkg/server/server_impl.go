@@ -3,12 +3,13 @@ package server
 import (
 	"bytes"
 	"encoding/binary"
-
-	"github.com/AND2797/f1-telemetry-api/pkg/udpHeaders"
 	"fmt"
 	"net"
 	"strconv"
 	"strings"
+
+	"github.com/AND2797/f1-telemetry-api/pkg/data"
+	"github.com/AND2797/f1-telemetry-api/pkg/headers"
 )
 
 func NewSession2018(HostPort string) *Session2018 {
@@ -39,48 +40,48 @@ func (s *Session2018) Listen() {
 	for {
 		s.Server.ReadFromUDP(s.Payload[:])
 
-		packetHeader := &udpHeaders.PacketHeader2018{}
+		packetHeader := &headers.PacketHeader2018{}
 		s.decodePayload(packetHeader)
 		switch packetId := packetHeader.M_packetId; packetId {
-		case udpHeaders.Motion:
-			motionPacket := &udpHeaders.PacketMotionData{}
-			s.decodePayload(motionPacket)
-			s.DataChannel <- motionPacket
+		case headers.Motion:
+			motionPacket := headers.PacketMotionData{}
+			s.decodePayload(&motionPacket)
+			s.DataChannel <- data.PacketMotionData{PacketMotionData: motionPacket}
 
-		case udpHeaders.Event:
-			eventPacket := &udpHeaders.PacketEventData{}
-			s.decodePayload(eventPacket)
-			s.DataChannel <- eventPacket
+		case headers.Event:
+			eventPacket := headers.PacketEventData{}
+			s.decodePayload(&eventPacket)
+			s.DataChannel <- data.PacketEventData{PacketEventData: eventPacket}
 
-		case udpHeaders.Lap:
-			lapPacket := &udpHeaders.PacketLapData{}
-			s.decodePayload(lapPacket)
-			s.DataChannel <- lapPacket
+		case headers.Lap:
+			lapPacket := headers.PacketLapData{}
+			s.decodePayload(&lapPacket)
+			s.DataChannel <- data.PacketLapData{PacketLapData: lapPacket}
 
-		case udpHeaders.CarSetups:
-			carSetupPacket := &udpHeaders.CarSetupData{}
-			s.decodePayload(carSetupPacket)
-			s.DataChannel <- carSetupPacket
+		case headers.CarSetups:
+			carSetupPacket := headers.PacketCarSetupData{}
+			s.decodePayload(&carSetupPacket)
+			s.DataChannel <- data.PacketCarSetupData{PacketCarSetupData: carSetupPacket}
 
-		case udpHeaders.CarStatus:
-			carStatusPacket := &udpHeaders.CarStatusData{}
-			s.decodePayload(carStatusPacket)
-			s.DataChannel <- carStatusPacket
+		case headers.CarStatus:
+			carStatusPacket := headers.PacketCarStatusData{}
+			s.decodePayload(&carStatusPacket)
+			s.DataChannel <- data.PacketCarStatusData{PacketCarStatusData: carStatusPacket}
 
-		case udpHeaders.CarTelemetry:
-			carTelemetryPacket := &udpHeaders.CarTelemetryData{}
-			s.decodePayload(carTelemetryPacket)
-			s.DataChannel <- carTelemetryPacket
+		case headers.CarTelemetry:
+			carTelemetryPacket := headers.PacketCarTelemetryData{}
+			s.decodePayload(&carTelemetryPacket)
+			s.DataChannel <- data.PacketCarTelemetryData{PacketCarTelemetryData: carTelemetryPacket}
 
-		case udpHeaders.Participants:
-			carParticipantsData := &udpHeaders.ParticipantData{}
-			s.decodePayload(carParticipantsData)
-			s.DataChannel <- carParticipantsData
+		case headers.Participants:
+			carParticipantsData := headers.ParticipantData{}
+			s.decodePayload(&carParticipantsData)
+			s.DataChannel <- data.ParticipantData{ParticipantData: carParticipantsData}
 
-		case udpHeaders.Session:
-			sessionData := &udpHeaders.PacketSessionData{}
-			s.decodePayload(sessionData)
-			s.DataChannel <- sessionData
+		case headers.Session:
+			sessionData := headers.PacketSessionData{}
+			s.decodePayload(&sessionData)
+			s.DataChannel <- data.PacketSessionData{PacketSessionData: sessionData}
 		}
 
 	}
