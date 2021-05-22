@@ -14,22 +14,15 @@ type Data struct {
 	PacketCarSetupData     udpHeaders.PacketCarSetupData
 	PacketCarTelemetryData udpHeaders.PacketCarTelemetryData
 	PacketCarStatusData    udpHeaders.PacketCarStatusData
-
-	// PacketMotionChannel       chan udpHeaders.PacketMotionData
-	// PacketSessionChannel      chan udpHeaders.PacketSessionData
-	// PacketLapChannel          chan udpHeaders.PacketLapData
-	// PacketEventChannel        chan udpHeaders.PacketEventData
-	// PacketParticipantsChannel chan udpHeaders.PacketParticipantsData
-	// PacketCarSetupChannel     chan udpHeaders.PacketCarSetupData
-	// PacketCarTelemetryChannel chan udpHeaders.PacketCarTelemetryData
-	// PacketCarStatusChannel    chan udpHeaders.PacketCarStatusData
+	DataChannel            chan interface{}
+	Payload                [2048]byte
 }
 
 type Session2018 struct {
 	HostPort     string
 	Server       *net.UDPConn
 	PacketHeader udpHeaders.PacketHeader2018
-	DataChannel  chan interface{}
+	Data
 }
 
 type Session2020 struct {

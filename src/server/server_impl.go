@@ -29,26 +29,64 @@ func NewSession2018(HostPort string) *Session2018 {
 	return s2018
 }
 
+func (d *Data) decodePayload(dataStruct interface{}) {
+	dataReader := bytes.NewReader(d.Payload[:])
+	binary.Read(dataReader, binary.LittleEndian, dataStruct)
+}
+
 func (s *Session2018) Listen() {
 
-	p := make([]byte, 2048)
 	for {
-		s.Server.ReadFromUDP(p)
-		headerReader := bytes.NewReader(p)
-		packetHeader := udpHeaders.PacketHeader2018{}
-		binary.Read(headerReader, binary.LittleEndian, &packetHeader)
+		s.Server.ReadFromUDP(s.Payload[:])
+
+		packetHeader := &udpHeaders.PacketHeader2018{}
+		s.decodePayload(packetHeader)
 		switch packetId := packetHeader.M_packetId; packetId {
 		case udpHeaders.Motion:
-			motionPacket := udpHeaders.PacketMotionData{}
-			motionReader := bytes.NewReader(p)
-			binary.Read(motionReader, binary.LittleEndian, &motionPacket)
+			motionPacket := &udpHeaders.PacketMotionData{}
+			s.decodePayload(motionPacket)
 			s.DataChannel <- motionPacket
+
+		case udpHeaders.Event:
+			eventPacket := &udpHeaders.PacketEventData{}
+			s.decodePayload(eventPacket)
+			s.DataChannel <- eventPacket
+
+		case udpHeaders.Lap:
+			lapPacket := &udpHeaders.PacketLapData{}
+			s.decodePayload(lapPacket)
+			s.DataChannel <- lapPacket
+
+		case udpHeaders.CarSetups:
+			carSetupPacket := &udpHeaders.CarSetupData{}
+			s.decodePayload(carSetupPacket)
+			s.DataChannel <- carSetupPacket
+
+		case udpHeaders.CarStatus:
+			carStatusPacket := &udpHeaders.CarStatusData{}
+			s.decodePayload(carStatusPacket)
+			s.DataChannel <- carStatusPacket
+
+		case udpHeaders.CarTelemetry:
+			carTelemetryPacket := &udpHeaders.CarTelemetryData{}
+			s.decodePayload(carTelemetryPacket)
+			s.DataChannel <- carTelemetryPacket
+
+		case udpHeaders.Participants:
+			carParticipantsData := &udpHeaders.ParticipantData{}
+			s.decodePayload(carParticipantsData)
+			s.DataChannel <- carParticipantsData
+
+		case udpHeaders.Session:
+			sessionData := &udpHeaders.PacketSessionData{}
+			s.decodePayload(sessionData)
+			s.DataChannel <- sessionData
 		}
+
 	}
 }
 
 func NewSession2020(HostPort string) *Session2020 {
-
 	s2020 := &Session2020{}
 	splitHostPort := strings.Split(HostPort, ":")
 	port, _ := strconv.Atoi(splitHostPort[1])
