@@ -3,7 +3,8 @@ package server
 import (
 	"bytes"
 	"encoding/binary"
-	"f1-tele/src/udpHeaders"
+
+	"github.com/AND2797/f1-telemetry-api/pkg/udpHeaders"
 	"fmt"
 	"net"
 	"strconv"

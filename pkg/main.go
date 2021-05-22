@@ -1,7 +1,7 @@
 package main
 
 import (
-	"f1-tele/src/server"
+	"github.com/AND2797/f1-telemetry-api/pkg/server"
 	"fmt"
 	"os"
 )
