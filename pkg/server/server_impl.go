@@ -11,7 +11,6 @@ import (
 )
 
 func NewSession2018(HostPort string) *Session2018 {
-
 	s2018 := &Session2018{}
 	s2018.DataChannel = make(chan interface{})
 	splitHostPort := strings.Split(HostPort, ":")

@@ -80,7 +80,7 @@ type PacketSessionData struct {
 	M_isSpectating        uint8
 	M_spectatorCarIndex   uint8
 	M_sliProNativeSupport uint8
-	M_marshalZones        []MarshalZone
+	M_marshalZones        [21]MarshalZone
 	M_safetyCarStatus     uint8
 	M_networkGame         uint8
 }
