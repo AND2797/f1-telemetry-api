@@ -46,42 +46,42 @@ func (s *Session2018) Listen() {
 		case headers.Motion:
 			motionPacket := headers.PacketMotionData{}
 			s.decodePayload(&motionPacket)
-			s.DataChannel <- data.PacketMotionData{PacketMotionData: motionPacket}
+			s.DataChannel <- &data.PacketMotionData{PacketMotionData: motionPacket}
 
 		case headers.Event:
 			eventPacket := headers.PacketEventData{}
 			s.decodePayload(&eventPacket)
-			s.DataChannel <- data.PacketEventData{PacketEventData: eventPacket}
+			s.DataChannel <- &data.PacketEventData{PacketEventData: eventPacket}
 
 		case headers.Lap:
 			lapPacket := headers.PacketLapData{}
 			s.decodePayload(&lapPacket)
-			s.DataChannel <- data.PacketLapData{PacketLapData: lapPacket}
+			s.DataChannel <- &data.PacketLapData{PacketLapData: lapPacket}
 
 		case headers.CarSetups:
 			carSetupPacket := headers.PacketCarSetupData{}
 			s.decodePayload(&carSetupPacket)
-			s.DataChannel <- data.PacketCarSetupData{PacketCarSetupData: carSetupPacket}
+			s.DataChannel <- &data.PacketCarSetupData{PacketCarSetupData: carSetupPacket}
 
 		case headers.CarStatus:
 			carStatusPacket := headers.PacketCarStatusData{}
 			s.decodePayload(&carStatusPacket)
-			s.DataChannel <- data.PacketCarStatusData{PacketCarStatusData: carStatusPacket}
+			s.DataChannel <- &data.PacketCarStatusData{PacketCarStatusData: carStatusPacket}
 
 		case headers.CarTelemetry:
 			carTelemetryPacket := headers.PacketCarTelemetryData{}
 			s.decodePayload(&carTelemetryPacket)
-			s.DataChannel <- data.PacketCarTelemetryData{PacketCarTelemetryData: carTelemetryPacket}
+			s.DataChannel <- &data.PacketCarTelemetryData{PacketCarTelemetryData: carTelemetryPacket}
 
 		case headers.Participants:
 			carParticipantsData := headers.ParticipantData{}
 			s.decodePayload(&carParticipantsData)
-			s.DataChannel <- data.ParticipantData{ParticipantData: carParticipantsData}
+			s.DataChannel <- &data.ParticipantData{ParticipantData: carParticipantsData}
 
 		case headers.Session:
 			sessionData := headers.PacketSessionData{}
 			s.decodePayload(&sessionData)
-			s.DataChannel <- data.PacketSessionData{PacketSessionData: sessionData}
+			s.DataChannel <- &data.PacketSessionData{PacketSessionData: sessionData}
 		}
 
 	}
