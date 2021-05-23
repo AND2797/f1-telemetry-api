@@ -6,6 +6,7 @@ type TrackInfo struct {
 	TotalLaps   uint8
 	TrackLength uint16
 	TrackId     int8
+	Era         uint8
 }
 
 type SessionTemperature struct {

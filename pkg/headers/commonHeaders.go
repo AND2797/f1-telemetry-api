@@ -1,4 +1,4 @@
-package headers 
+package headers
 
 type PacketHeader struct {
 	M_packetFormat    uint16  // 2018
@@ -145,6 +145,7 @@ type CarSetupData struct {
 	M_rearAntiRollBar       uint8
 	M_frontSuspensionHeight uint8
 	M_rearSuspensionHeight  uint8
+	M_brakePressure         uint8
 	M_brakeBias             uint8
 	M_frontTyrePressure     uint8
 	M_rearTyrePressure      uint8
@@ -158,20 +159,20 @@ type PacketCarSetupData struct {
 }
 
 type CarTelemetryData struct {
-	M_speed                   uint16
-	M_throttle                uint8
-	M_steer                   int8
-	M_brake                   uint8
-	M_clutch                  int8
-	M_gear                    int8
-	M_engineRPM               uint16
-	M_drs                     uint8
-	M_revLightsPercent        uint8
-	M_brakesTemperature       [4]uint16
-	M_tyresSurfaceTemperature [4]uint16
-	M_tyresInnerTemperature   [4]uint16
-	M_engineTemperature       uint16
-	M_tyresPressure           [4]float32
+	Speed                   uint16
+	Throttle                uint8
+	Steer                   int8
+	Brake                   uint8
+	Clutch                  int8
+	Gear                    int8
+	EngineRPM               uint16
+	Drs                     uint8
+	RevLightsPercent        uint8
+	BrakesTemperature       [4]uint16
+	TyresSurfaceTemperature [4]uint16
+	TyresInnerTemperature   [4]uint16
+	EngineTemperature       uint16
+	TyresPressure           [4]float32
 }
 
 type PacketCarTelemetryData struct {
