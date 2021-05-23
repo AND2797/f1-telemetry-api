@@ -1,4 +1,4 @@
-package udpHeaders
+package headers 
 
 type PacketHeader2020 struct {
 	PacketHeader
