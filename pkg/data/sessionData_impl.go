@@ -3,10 +3,10 @@ package data
 func (pktSession *PacketSessionData) GetTrackInfo() TrackInfo {
 
 	ti := TrackInfo{}
-	ti.Era = pktSession.M_era
-	ti.TotalLaps = pktSession.M_totalLaps
-	ti.TrackId = pktSession.M_trackId
-	ti.TrackLength = pktSession.M_trackLength
+	ti.Era = pktSession.Era
+	ti.TotalLaps = pktSession.TotalLaps
+	ti.TrackId = pktSession.TrackId
+	ti.TrackLength = pktSession.TrackLength
 
 	return ti
 }
@@ -14,9 +14,9 @@ func (pktSession *PacketSessionData) GetTrackInfo() TrackInfo {
 func (pktSession *PacketSessionData) GetSessionTemp() SessionTemperature {
 
 	st := SessionTemperature{}
-	st.AirTemperature = pktSession.M_airTemperature
-	st.TrackTemperature = pktSession.M_trackTemperature
-	st.Weather = pktSession.M_weather
+	st.AirTemperature = pktSession.AirTemperature
+	st.TrackTemperature = pktSession.TrackTemperature
+	st.Weather = pktSession.Weather
 
 	return st
 }

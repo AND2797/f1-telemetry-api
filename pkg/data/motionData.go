@@ -39,3 +39,15 @@ type Attitude struct {
 	Pitch float32
 	Roll  float32
 }
+
+type LocalVelocity struct {
+	LocalVelocityX float32
+	LocalVelocityY float32
+	LocalVelocityZ float32
+}
+
+type AngularAcceleration struct {
+	AngularAccelerationX float32
+	AngularAccelerationY float32
+	AngularAccelerationZ float32
+}

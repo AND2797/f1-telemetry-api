@@ -2,55 +2,70 @@ package data
 
 func (pktMotion *PacketMotionData) GetWorldPosition(carIdx int) WorldPosition {
 
-	car := pktMotion.M_carMotionData[carIdx]
+	car := pktMotion.CarMotionDataList[carIdx]
 	wp := WorldPosition{}
-	wp.WorldPositionX = car.M_worldPositionX
-	wp.WorldPositionY = car.M_worldPositionY
-	wp.WorldPositionZ = car.M_worldPositionZ
+	wp.WorldPositionX = car.WorldPositionX
+	wp.WorldPositionY = car.WorldPositionY
+	wp.WorldPositionZ = car.WorldPositionZ
 
 	return wp
 }
 
 func (pktMotion *PacketMotionData) GetWorldVelocity(carIdx int) WorldVelocity {
 
-	car := pktMotion.M_carMotionData[carIdx]
+	car := pktMotion.CarMotionDataList[carIdx]
 	wp := WorldVelocity{}
-	wp.WorldVelocityX = car.M_worldVelocityX
-	wp.WorldVelocityY = car.M_worldVelocityY
-	wp.WorldVelocityZ = car.M_worldVelocityZ
+	wp.WorldVelocityX = car.WorldVelocityX
+	wp.WorldVelocityY = car.WorldVelocityY
+	wp.WorldVelocityZ = car.WorldVelocityZ
 
 	return wp
 }
 
 func (pktMotion *PacketMotionData) GetWorldForwardDir(carIdx int) WorldForwardDir {
 
-	car := pktMotion.M_carMotionData[carIdx]
+	car := pktMotion.CarMotionDataList[carIdx]
 	wfd := WorldForwardDir{}
-	wfd.WorldForwardDirX = car.M_worldForwardDirX
-	wfd.WorldForwardDirY = car.M_worldForwardDirY
-	wfd.WorldForwardDirZ = car.M_worldForwardDirZ
+	wfd.WorldForwardDirX = car.WorldForwardDirX
+	wfd.WorldForwardDirY = car.WorldForwardDirY
+	wfd.WorldForwardDirZ = car.WorldForwardDirZ
 
 	return wfd
 }
 
 func (pktMotion *PacketMotionData) GetGForce(carIdx int) GForces {
 
-	car := pktMotion.M_carMotionData[carIdx]
+	car := pktMotion.CarMotionDataList[carIdx]
 	gf := GForces{}
-	gf.GForceLateral = car.M_gForceLateral
-	gf.GForceLongitudinal = car.M_gForceLongitudinal
-	gf.GForceVertical = car.M_gForceVertical
+	gf.GForceLateral = car.GForceLateral
+	gf.GForceLongitudinal = car.GForceLongitudinal
+	gf.GForceVertical = car.GForceVertical
 
 	return gf
 }
 
 func (pktMotion *PacketMotionData) GetAttitude(carIdx int) Attitude {
 
-	car := pktMotion.M_carMotionData[carIdx]
+	car := pktMotion.CarMotionDataList[carIdx]
 	at := Attitude{}
-	at.Yaw = car.M_yaw
-	at.Pitch = car.M_pitch
-	at.Roll = car.M_roll
-
+	at.Yaw = car.Yaw
+	at.Pitch = car.Pitch
+	at.Roll = car.Roll
 	return at
+}
+
+func (pktMotion *PacketMotionData) GetLocalVelocity() LocalVelocity {
+	lv := LocalVelocity{}
+	lv.LocalVelocityX = pktMotion.LocalVelocityX
+	lv.LocalVelocityY = pktMotion.LocalVelocityY
+	lv.LocalVelocityZ = pktMotion.LocalVelocityZ
+	return lv
+}
+
+func (pktMotion *PacketMotionData) GetAngularAcceleration() AngularAcceleration {
+	aa := AngularAcceleration{}
+	aa.AngularAccelerationX = pktMotion.AngularAccelerationX
+	aa.AngularAccelerationY = pktMotion.AngularAccelerationY
+	aa.AngularAccelerationZ = pktMotion.AngularAccelerationZ
+	return aa
 }

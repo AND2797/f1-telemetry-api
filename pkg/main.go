@@ -13,7 +13,6 @@ func main() {
 	if args[0] == "2018" {
 		s2018 := server.NewSession2018("127.0.0.1:20777")
 		for msg := range s2018.DataChannel {
-			fmt.Printf("%T\n", msg)
 			switch m := msg.(type) {
 			case *data.PacketMotionData:
 				gforces := m.GetGForce(0)

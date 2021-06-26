@@ -1,64 +1,64 @@
 package data
 
 func (pktSetup *PacketCarSetupData) GetAerodynamicsInfo(carIdx int) AerodynamicsInfo {
-	car := pktSetup.M_carSetups[carIdx]
+	car := pktSetup.CarSetupsList[carIdx]
 	aero := AerodynamicsInfo{}
-	aero.FrontWing = car.M_frontWing
-	aero.RearWing = car.M_rearWing
+	aero.FrontWing = car.FrontWing
+	aero.RearWing = car.RearWing
 	return aero
 }
 
 func (pktSetup *PacketCarSetupData) GetTransInfo(carIdx int) TransInfo {
-	car := pktSetup.M_carSetups[carIdx]
+	car := pktSetup.CarSetupsList[carIdx]
 	trans := TransInfo{}
-	trans.OffThrottle = car.M_offThrottle
-	trans.OnThrottle = car.M_onThrottle
+	trans.OffThrottle = car.OffThrottle
+	trans.OnThrottle = car.OnThrottle
 	return trans
 }
 
 func (pktSetup *PacketCarSetupData) GetSuspensionGeomInfo(carIdx int) SuspensionGeomInfo {
-	car := pktSetup.M_carSetups[carIdx]
+	car := pktSetup.CarSetupsList[carIdx]
 	sg := SuspensionGeomInfo{}
-	sg.FrontCamber = car.M_frontCamber
-	sg.FrontToe = car.M_frontToe
-	sg.RearCamber = car.M_rearCamber
-	sg.RearToe = car.M_rearToe
+	sg.FrontCamber = car.FrontCamber
+	sg.FrontToe = car.FrontToe
+	sg.RearCamber = car.RearCamber
+	sg.RearToe = car.RearToe
 
 	return sg
 }
 
 func (pktSetup *PacketCarSetupData) GetSuspensionInfo(carIdx int) SuspensionInfo {
-	car := pktSetup.M_carSetups[carIdx]
+	car := pktSetup.CarSetupsList[carIdx]
 	si := SuspensionInfo{}
-	si.FrontAntiRollBar = car.M_frontAntiRollBar
-	si.RearAntiRollBar = car.M_rearAntiRollBar
-	si.FrontSuspension = car.M_frontSuspension
-	si.RearSuspension = car.M_rearSuspension
-	si.FrontSuspensionHeight = car.M_frontSuspensionHeight
-	si.RearSuspensionHeight = car.M_rearSuspensionHeight
+	si.FrontAntiRollBar = car.FrontAntiRollBar
+	si.RearAntiRollBar = car.RearAntiRollBar
+	si.FrontSuspension = car.FrontSuspension
+	si.RearSuspension = car.RearSuspension
+	si.FrontSuspensionHeight = car.FrontSuspensionHeight
+	si.RearSuspensionHeight = car.RearSuspensionHeight
 	return si
 }
 
 func (pktSetup *PacketCarSetupData) GetBrakesInfo(carIdx int) BrakesInfo {
-	car := pktSetup.M_carSetups[carIdx]
+	car := pktSetup.CarSetupsList[carIdx]
 	bi := BrakesInfo{}
-	bi.BrakeBias = car.M_brakeBias
-	bi.BrakePressuire = car.M_brakePressure
+	bi.BrakeBias = car.BrakeBias
+	bi.BrakePressuire = car.BrakePressure
 	return bi
 }
 
 func (pktSetup *PacketCarSetupData) GetTyresInfo(carIdx int) TyresInfo {
-	car := pktSetup.M_carSetups[carIdx]
+	car := pktSetup.CarSetupsList[carIdx]
 	ti := TyresInfo{}
-	ti.FrontTyrePressure = car.M_frontTyrePressure
-	ti.RearTyrePressure = car.M_rearTyrePressure
+	ti.FrontTyrePressure = car.FrontTyrePressure
+	ti.RearTyrePressure = car.RearTyrePressure
 	return ti
 }
 
 func (pktSetup *PacketCarSetupData) GetWeightInfo(carIdx int) WeightInfo {
-	car := pktSetup.M_carSetups[carIdx]
+	car := pktSetup.CarSetupsList[carIdx]
 	wi := WeightInfo{}
-	wi.Ballast = car.M_ballast
-	wi.FuelLoad = car.M_fuelLoad
+	wi.Ballast = car.Ballast
+	wi.FuelLoad = car.FuelLoad
 	return wi
 }

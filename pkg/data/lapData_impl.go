@@ -2,32 +2,32 @@ package data
 
 func (pktLap *PacketLapData) GetLapInfo(carIdx int) LapInfo {
 
-	carIdxLap := pktLap.M_lapData[carIdx]
+	carIdxLap := pktLap.LapData[carIdx]
 	lapInfo := LapInfo{}
-	lapInfo.BestLapTime = carIdxLap.M_bestLapTime
-	lapInfo.CurrentLapNum = carIdxLap.M_currentLapNum
-	lapInfo.LastLapTime = carIdxLap.M_lastLapTime
-	lapInfo.CurrentLapNum = carIdxLap.M_currentLapNum
+	lapInfo.BestLapTime = carIdxLap.BestLapTime
+	lapInfo.CurrentLapNum = carIdxLap.CurrentLapNum
+	lapInfo.LastLapTime = carIdxLap.LastLapTime
+	lapInfo.CurrentLapNum = carIdxLap.CurrentLapNum
 
 	return lapInfo
 }
 
 func (pktLap *PacketLapData) GetSectorTimes(carIdx int) SectorTimes {
 
-	carIdxLap := pktLap.M_lapData[carIdx]
+	carIdxLap := pktLap.LapData[carIdx]
 	sectorTimes := SectorTimes{}
-	sectorTimes.Sector1Time = carIdxLap.M_sector1Time
-	sectorTimes.Sector2Time = carIdxLap.M_sector2Time
+	sectorTimes.Sector1Time = carIdxLap.Sector1Time
+	sectorTimes.Sector2Time = carIdxLap.Sector2Time
 
 	return sectorTimes
 }
 
 func (pktLap *PacketLapData) GetDistances(carIdx int) Distances {
 
-	carIdxLap := pktLap.M_lapData[carIdx]
+	carIdxLap := pktLap.LapData[carIdx]
 	distances := Distances{}
-	distances.LapDistance = carIdxLap.M_lapDistance
-	distances.LapDistance = carIdxLap.M_totalDistance
+	distances.LapDistance = carIdxLap.LapDistance
+	distances.LapDistance = carIdxLap.TotalDistance
 
 	return distances
 }

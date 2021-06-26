@@ -42,7 +42,7 @@ func (s *Session2018) Listen() {
 
 		packetHeader := &headers.PacketHeader2018{}
 		s.decodePayload(packetHeader)
-		switch packetId := packetHeader.M_packetId; packetId {
+		switch packetId := packetHeader.PacketId; packetId {
 		case headers.Motion:
 			motionPacket := headers.PacketMotionData{}
 			s.decodePayload(&motionPacket)
