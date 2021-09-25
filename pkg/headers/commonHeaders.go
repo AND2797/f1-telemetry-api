@@ -1,6 +1,6 @@
 package headers
 
-type PacketHeader struct {
+type Header struct {
 	PacketFormat    uint16  // 2018
 	PacketVersion   uint8   // Version of this packet type, all start from 1
 	PacketId        uint8   // Identifier of the packet type
@@ -14,8 +14,8 @@ type PacketHeader struct {
 Motion 0, Session 1, Lap Data 2, Event 3, Participants 4, Car Setups 5, Car Telemetry 6, Car Status 7*/
 
 type CarMotionData struct {
-	WorldPositionX float32
 	WorldPositionY float32
+	WorldPositionX float32
 	WorldPositionZ float32
 
 	WorldVelocityX float32
@@ -38,8 +38,7 @@ type CarMotionData struct {
 	Roll               float32
 }
 
-type PacketMotionData struct {
-	Header            PacketHeader
+type AllCarMotionData struct {
 	CarMotionDataList [20]CarMotionData
 
 	//Extra player car ONLY data
@@ -63,8 +62,7 @@ type MarshalZone struct {
 	ZoneFlag  int16
 }
 
-type PacketSessionData struct {
-	Header              PacketHeader
+type SessionData struct {
 	Weather             uint8
 	TrackTemperature    int8
 	AirTemperature      int8
@@ -105,13 +103,7 @@ type LapData struct {
 	ResultStatus      uint8
 }
 
-type PacketLapData struct {
-	Header  PacketHeader
-	LapData [20]LapData
-}
-
-type PacketEventData struct {
-	Header          PacketHeader
+type EventData struct {
 	EventStringCode [4]uint8
 }
 
@@ -124,8 +116,7 @@ type ParticipantData struct {
 	Name         [48]byte
 }
 
-type PacketParticipantsData struct {
-	Header      PacketHeader
+type AllParticipantsData struct {
 	NumCars     uint8
 	Partcipants [20]ParticipantData
 }
@@ -153,8 +144,7 @@ type CarSetupData struct {
 	FuelLoad              float32
 }
 
-type PacketCarSetupData struct {
-	Header        PacketHeader
+type AllCarSetupData struct {
 	CarSetupsList [20]CarSetupData
 }
 
@@ -163,7 +153,7 @@ type CarTelemetryData struct {
 	Throttle                uint8
 	Steer                   int8
 	Brake                   uint8
-	Clutch                  int8
+	Clutch                  uint8
 	Gear                    int8
 	EngineRPM               uint16
 	DRS                     uint8
@@ -175,10 +165,9 @@ type CarTelemetryData struct {
 	TyresPressure           [4]float32
 }
 
-type PacketCarTelemetryData struct {
-	Header           PacketHeader
-	CarTelemetryData [20]CarTelemetryData
-	ButtonStatus     uint32
+type AllCarTelemetryData struct {
+	CarList      [20]CarTelemetryData
+	ButtonStatus uint32
 }
 
 type CarStatusData struct {
@@ -210,7 +199,6 @@ type CarStatusData struct {
 	ErsDeployedThisLap      float32
 }
 
-type PacketCarStatusData struct {
-	Header            PacketHeader
+type AllCarStatusData struct {
 	CarStatusDataList [20]CarStatusData
 }

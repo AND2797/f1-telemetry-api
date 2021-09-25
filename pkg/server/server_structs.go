@@ -7,26 +7,37 @@ import (
 )
 
 type Data struct {
-	PacketMotionData       headers.PacketMotionData
-	PacketSessionData      headers.PacketSessionData
-	PacketLapData          headers.PacketLapData
-	PacketEventData        headers.PacketEventData
-	PacketParticipantsData headers.PacketParticipantsData
-	PacketCarSetupData     headers.PacketCarSetupData
-	PacketCarTelemetryData headers.PacketCarTelemetryData
-	PacketCarStatusData    headers.PacketCarStatusData
-	DataChannel            chan interface{}
-	Payload                [2048]byte
+	MotionData       headers.CarMotionData
+	SessionData      headers.SessionData
+	LapData          headers.LapData
+	EventData        headers.EventData
+	ParticipantsData headers.ParticipantData
+	SetupData        headers.CarSetupData
+	TelemetryData    headers.CarTelemetryData
+	StatusData       headers.CarStatusData
+}
+
+type DataChannels struct {
+	MotionDataChan       chan headers.CarMotionData
+	SessionDataChan      chan headers.SessionData
+	LapDataChan          chan headers.LapData
+	EventDataChan        chan headers.EventData
+	ParticipantsDataChan chan headers.ParticipantData
+	SetupDataChan        chan headers.CarSetupData
+	TelemetryDataChan    chan headers.CarTelemetryData
+	StatusDataChan       chan headers.CarStatusData
 }
 
 type Session2018 struct {
 	HostPort string
-	Server   *net.UDPConn
+	conn     *net.UDPConn
 	Data
+	DataChannels
 }
 
 type Session2020 struct {
 	HostPort string
-	Server   *net.UDPConn
+	conn     *net.UDPConn
 	Data
+	DataChannels
 }
